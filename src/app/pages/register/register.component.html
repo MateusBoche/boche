@@ -37,14 +37,13 @@
     </mat-form-field>
 
     <!-- Seleção de perfil -->
-    <div class="selection-group">
-      <p class="selection-label">Selecione seu perfil:</p>
-      <mat-radio-group formControlName="perfil">
-        <mat-radio-button value="doadora">Doadora</mat-radio-button>
-        <mat-radio-button value="receptora">Receptora</mat-radio-button>
-        <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
-      </mat-radio-group>
-    </div>
+    <mat-radio-group formControlName="perfil">
+      <mat-radio-button value="doadora">Doadora</mat-radio-button>
+      <mat-radio-button value="receptora">Receptora</mat-radio-button>
+      <mat-radio-button value="profissional">Profissional de saúde</mat-radio-button>
+    </mat-radio-group>
+
+
 
     <!-- Campo de cidade com autocomplete -->
     <mat-form-field appearance="fill" class="full-width">

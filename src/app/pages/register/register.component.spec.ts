@@ -25,13 +25,13 @@ export class RegisterComponent implements OnInit {
       telefone: ['', Validators.required],
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
-      doadora: [false],
-      receptora: [false],
-      profissional: [false],
-      id_cidade: [null],
+      perfil: ['', Validators.required], // ✅ somente esse para o perfil
       latitude: [null],
-      longitude: [null]
+      longitude: [null],
+      id_cidade: [null]
     });
+
+
   }
 
   ngOnInit(): void {

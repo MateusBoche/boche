@@ -32,7 +32,7 @@ interface Cidade {
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  cidadeControl = new FormControl(''); // ✅ Adicionando controle para o autocomplete
+  cidadeControl = new FormControl('');
   cidades: Cidade[] = [];
   cidadesFiltradas$: Observable<Cidade[]> = new Observable();
 
@@ -47,9 +47,7 @@ export class RegisterComponent implements OnInit {
       telefone: ['', Validators.required],
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
-      doadora: [false],
-      receptora: [false],
-      profissional: [false],
+      perfil: ['', Validators.required], // ✅ usamos 'perfil' para escolha única
       latitude: [null],
       longitude: [null],
       id_cidade: [null]
@@ -60,7 +58,6 @@ export class RegisterComponent implements OnInit {
     this.getLocation();
     this.carregarCidades();
 
-    // 🔥 Filtro dinâmico do autocomplete
     this.cidadesFiltradas$ = this.cidadeControl.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarCidades(value || ''))
@@ -86,38 +83,37 @@ export class RegisterComponent implements OnInit {
   }
 
   carregarCidades(): void {
-    // 🔹 Aqui você pode substituir pela chamada ao backend futuramente
     this.cidades = [
-  { id: 1, nome: 'Santa Rita do Sapucaí' },
-  { id: 2, nome: 'Belo Horizonte' },
-  { id: 3, nome: 'Uberlândia' },
-  { id: 4, nome: 'Contagem' },
-  { id: 5, nome: 'Juiz de Fora' },
-  { id: 6, nome: 'Betim' },
-  { id: 7, nome: 'Montes Claros' },
-  { id: 8, nome: 'Ribeirão das Neves' },
-  { id: 9, nome: 'Uberaba' },
-  { id: 10, nome: 'Governador Valadares' },
-  { id: 11, nome: 'Ipatinga' },
-  { id: 12, nome: 'Sete Lagoas' },
-  { id: 13, nome: 'Divinópolis' },
-  { id: 14, nome: 'Poços de Caldas' },
-  { id: 15, nome: 'Patos de Minas' },
-  { id: 16, nome: 'Teófilo Otoni' },
-  { id: 17, nome: 'Barbacena' },
-  { id: 18, nome: 'Sabará' },
-  { id: 19, nome: 'Pouso Alegre' },
-  { id: 20, nome: 'Araguari' },
-  { id: 21, nome: 'Passos' },
-  { id: 22, nome: 'Itabira' },
-  { id: 23, nome: 'Varginha' },
-  { id: 24, nome: 'Conselheiro Lafaiete' },
-  { id: 25, nome: 'Lavras' },
-  { id: 26, nome: 'Pará de Minas' },
-  { id: 27, nome: 'Alfenas' },
-  { id: 28, nome: 'Nova Serrana' },
-  { id: 29, nome: 'Ituiutaba' },
-  { id: 30, nome: 'São João del Rei' }
+      { id: 1, nome: 'Santa Rita do Sapucaí' },
+      { id: 2, nome: 'Belo Horizonte' },
+      { id: 3, nome: 'Uberlândia' },
+      { id: 4, nome: 'Contagem' },
+      { id: 5, nome: 'Juiz de Fora' },
+      { id: 6, nome: 'Betim' },
+      { id: 7, nome: 'Montes Claros' },
+      { id: 8, nome: 'Ribeirão das Neves' },
+      { id: 9, nome: 'Uberaba' },
+      { id: 10, nome: 'Governador Valadares' },
+      { id: 11, nome: 'Ipatinga' },
+      { id: 12, nome: 'Sete Lagoas' },
+      { id: 13, nome: 'Divinópolis' },
+      { id: 14, nome: 'Poços de Caldas' },
+      { id: 15, nome: 'Patos de Minas' },
+      { id: 16, nome: 'Teófilo Otoni' },
+      { id: 17, nome: 'Barbacena' },
+      { id: 18, nome: 'Sabará' },
+      { id: 19, nome: 'Pouso Alegre' },
+      { id: 20, nome: 'Araguari' },
+      { id: 21, nome: 'Passos' },
+      { id: 22, nome: 'Itabira' },
+      { id: 23, nome: 'Varginha' },
+      { id: 24, nome: 'Conselheiro Lafaiete' },
+      { id: 25, nome: 'Lavras' },
+      { id: 26, nome: 'Pará de Minas' },
+      { id: 27, nome: 'Alfenas' },
+      { id: 28, nome: 'Nova Serrana' },
+      { id: 29, nome: 'Ituiutaba' },
+      { id: 30, nome: 'São João del Rei' }
     ];
   }
 
@@ -135,8 +131,18 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      this.authService.register(this.registerForm.value).subscribe({
+      const formData = { ...this.registerForm.value };
+
+      // ✅ Converte o valor 'perfil' em campos booleanos esperados pelo backend
+      formData.doadora = formData.perfil === 'doadora';
+      formData.receptora = formData.perfil === 'receptora';
+      formData.profissional = formData.perfil === 'profissional';
+
+      delete formData.perfil;
+
+
+
+      this.authService.register(formData).subscribe({
         next: () => {
           alert('Cadastro realizado com sucesso!');
           this.router.navigate(['/login']);
