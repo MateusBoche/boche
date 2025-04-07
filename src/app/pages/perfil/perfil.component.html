@@ -1,0 +1,13 @@
+<h2>Meu Perfil</h2>
+<form [formGroup]="perfilForm" (ngSubmit)="salvarAlteracoes()">
+  <label>Nome:</label>
+  <input type="text" formControlName="nome" />
+
+  <label>Email:</label>
+  <input type="email" formControlName="email" [disabled]="true" />
+
+  <label>Telefone:</label>
+  <input type="text" formControlName="telefone" />
+
+  <button type="submit">Salvar Alterações</button>
+</form>

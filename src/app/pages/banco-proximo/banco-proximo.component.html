@@ -1,0 +1,26 @@
+<!-- Alerta de erro -->
+<div *ngIf="erro" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+  {{ erro }}
+</div>
+
+<!-- Exibição do banco de leite mais próximo -->
+<div *ngIf="banco" class="max-w-md mx-auto bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+  <h2 class="text-xl font-bold text-pink-600 mb-4 text-center">
+    Banco de leite mais próximo
+  </h2>
+
+  <div class="space-y-2">
+    <p>
+      <strong class="text-gray-700">Nome:</strong>
+      <span class="text-gray-900">{{ banco.nome }}</span>
+    </p>
+    <p>
+      <strong class="text-gray-700">Endereço:</strong>
+      <span class="text-gray-900">{{ banco.endereco }}</span>
+    </p>
+    <p>
+      <strong class="text-gray-700">Distância:</strong>
+      <span class="text-gray-900">{{ banco.distancia | number:'1.1-2' }} km</span>
+    </p>
+  </div>
+</div>
