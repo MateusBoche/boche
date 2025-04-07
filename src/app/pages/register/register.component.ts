@@ -28,7 +28,7 @@ interface Cidade {
     MatRadioModule
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -47,10 +47,10 @@ export class RegisterComponent implements OnInit {
       telefone: ['', Validators.required],
       cpf: ['', Validators.required],
       senha: ['', Validators.required],
-      perfil: ['', Validators.required], // ✅ usamos 'perfil' para escolha única
+      perfil: ['', Validators.required],
       latitude: [null],
       longitude: [null],
-      id_cidade: [null]
+      id_cidade: [null, Validators.required]
     });
   }
 
@@ -133,14 +133,14 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const formData = { ...this.registerForm.value };
 
-      // ✅ Converte o valor 'perfil' em campos booleanos esperados pelo backend
+      // Converte perfil para campos booleanos
       formData.doadora = formData.perfil === 'doadora';
       formData.receptora = formData.perfil === 'receptora';
       formData.profissional = formData.perfil === 'profissional';
 
       delete formData.perfil;
 
-
+      console.log('Enviando dados para o backend:', formData);
 
       this.authService.register(formData).subscribe({
         next: () => {
@@ -152,6 +152,8 @@ export class RegisterComponent implements OnInit {
           alert('Erro ao cadastrar. Verifique os dados.');
         }
       });
+    } else {
+      alert('Preencha todos os campos obrigatórios corretamente.');
     }
   }
 }

@@ -23,4 +23,10 @@
       <span class="banco-distancia">{{ banco.distancia | number:'1.1-2' }} km</span>
     </p>
   </div>
+
+  <!-- Botão para voltar ao painel -->
+  <div class="voltar-container">
+    <button class="btn-voltar" [routerLink]="'/painel'" routerLinkActive="active">Voltar para o painel</button>
+
+  </div>
 </div>

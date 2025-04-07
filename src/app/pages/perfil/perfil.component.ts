@@ -6,11 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-perfil',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css'],
+    selector: 'app-perfil',
+    imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+    templateUrl: './perfil.component.html',
+    styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
   perfilForm: FormGroup;

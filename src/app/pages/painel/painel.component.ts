@@ -4,11 +4,10 @@ import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-painel',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
-  templateUrl: './painel.component.html',
-  styleUrls: ['./painel.component.css']
+    selector: 'app-painel',
+    imports: [CommonModule, RouterModule, MatButtonModule],
+    templateUrl: './painel.component.html',
+    styleUrls: ['./painel.component.css']
 })
 export class PainelComponent {
   constructor(private router: Router) {}

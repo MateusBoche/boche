@@ -14,3 +14,4 @@ bootstrapApplication(AppComponent, {
     ...materialImports, provideAnimationsAsync() // ✅ Adicionando os módulos do Angular Material aqui
   ]
 }).catch((err) => console.error(err));
+

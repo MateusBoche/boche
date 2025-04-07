@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BancoService } from '../../services/banco.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MapComponent } from '../map/map.component'; // Importando o MapComponent
+import { RouterModule } from '@angular/router'; // Importando RouterModule
 
 @Component({
   selector: 'app-banco-proximo',
-  standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  standalone: true, // Garantindo que o componente seja standalone
+  imports: [CommonModule, HttpClientModule, MapComponent, RouterModule], // Garantindo que MapComponent e RouterModule sejam importados
   templateUrl: './banco-proximo.component.html',
   styleUrls: ['./banco-proximo.component.css'],
-  providers: [BancoService] // 🔥 importante para garantir a injeção
+  providers: [BancoService]
 })
 export class BancoProximoComponent implements OnInit {
   banco: any = null;

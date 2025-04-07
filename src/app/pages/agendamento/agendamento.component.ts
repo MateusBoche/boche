@@ -14,19 +14,18 @@ interface BancoDeLeite {
 }
 
 @Component({
-  selector: 'app-agendamento',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatButtonModule
-  ],
-  templateUrl: './agendamento.component.html',
-  styleUrls: ['./agendamento.component.css']
+    selector: 'app-agendamento',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatButtonModule
+    ],
+    templateUrl: './agendamento.component.html',
+    styleUrls: ['./agendamento.component.css']
 })
 export class AgendamentoComponent implements OnInit {
   agendamentoForm: FormGroup;
