@@ -74,11 +74,12 @@ export class RegisterComponent implements OnInit {
           });
         },
         error => {
-          console.warn('Geolocalização não permitida:', error);
+          console.warn('Não foi possível obter a localização. Continuando sem latitude/longitude.', error);
+          // Continua sem localização, sem travar o cadastro
         }
       );
     } else {
-      console.warn('Geolocalização não suportada pelo navegador.');
+      console.warn('Geolocalização não suportada pelo navegador. Continuando sem latitude/longitude.');
     }
   }
 
